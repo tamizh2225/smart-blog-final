@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-
+import { getBlogById, updateBlog } from "../api/blogApi";
 const EditBlog = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,8 +16,7 @@ const EditBlog = () => {
 
   // ✅ a) Fetch Blog by ID
   useEffect(() => {
-    axios
-      .get(`/blogs/${id}`)
+    getBlogById(id)
       .then((res) => {
         const blog = res.data;
         setTitle(blog.title || "");
@@ -56,7 +54,7 @@ const EditBlog = () => {
 
     try {
       setLoading(true);
-      await axios.put(`/blogs/${id}`, updatedBlog);
+      await updateBlog(id, updatedBlog);
       navigate("/poster-home", {
         state: { successMessage: "Blog updated successfully!" },
       });

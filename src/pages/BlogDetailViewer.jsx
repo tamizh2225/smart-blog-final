@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { getBlogById } from "../api/blogApi";
 import TagList from "../components/TagList";
 import CommentBox from "../components/CommentBox";
 
@@ -13,8 +13,7 @@ const BlogDetailViewer = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`/blogs/${id}`)
+    getBlogById(id)
       .then((res) => {
         setBlog(res.data);
         setError(null);
@@ -86,7 +85,7 @@ const BlogDetailViewer = () => {
       </p>
 
       {/* Tags */}
-      <TagList tags={blog.tags || []} />
+      <TagList tags={blog.tag ? blog.tag.split(",") : []} />
 
       {/* Comments Section */}
       <div className="mt-12">
