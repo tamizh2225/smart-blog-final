@@ -1,0 +1,45 @@
+{
+  "blogs": [
+    {
+      "title": "Tamizh",
+      "subject": "defghijklmno",
+      "content": "https://jobsearchers.in/avasoft-hiring-ai-ml-trainee-engineers-freshers-apply-now/https://jobsearchers.in/avasoft-hiring-ai-ml-trainee-engineers-freshers-apply-now/https://jobsearchers.in/avasoft-hiring-ai-ml-trainee-engineers-freshers-apply-now/https://jobsearchers.in/avasoft-hiring-ai-ml-trainee-engineers-freshers-apply-now/https://jobsearchers.in/avasoft-hiring-ai-ml-trainee-engineers-freshers-apply-now/",
+      "tag": "asd,asd,asd",
+      "image": "https://as1.ftcdn.net/v2/jpg/05/64/11/42/1000_F_564114238_mcU43Fplgq3J1wpxYUCvDIew9JxUbJrB.jpg",
+      "author": "selvan",
+      "createdAt": "2025-08-04T11:52:58.163Z",
+      "id": "6159"
+    },
+    {
+      "id": "bda4",
+      "title": "Blog website by Tamizh",
+      "subject": "create a blog posting and retriving website using react",
+      "content": "2. Expense Tracker with Charts\nManage daily expenses, visualize spending with pie and bar charts.\n\nFrontend: React + Chart.js\n\nBackend: Django REST / Node.js + Express\n\nDatabase: PostgreSQL / MongoDB\n\nFeatures: JWT Auth, user dashboard, category-wise analysis\n\nGitHub: Two repos (client/server) with readme\n\nDeployment: Vercel (frontend), Railway (backend)\n\n",
+      "tag": "blog, website,app",
+      "image": "https://w0.peakpx.com/wallpaper/875/57/HD-wallpaper-ganpati-bappa-best-adiyogi-background-lord-ganesha-god.jpg",
+      "author": "selvan",
+      "createdAt": "2025-08-04T07:10:32.276Z"
+    },
+    {
+      "id": "1049",
+      "title": "AI Generated Title Example",
+      "subject": "own portfolio website",
+      "content": "<p className=\"text-sm text-gray-500 text-right\">{subject.length}/200 characters</p><p className=\"text-sm text-gray-500 text-right\">{subject.length}/200 characters</p><p className=\"text-sm text-gray-500 text-right\">{subject.length}/200 characters</p><p className=\"text-sm text-gray-500 text-right\">{subject.length}/200 characters</p><p className=\"text-sm text-gray-500 text-right\">{subject.length}/200 characters</p>",
+      "tag": "html,css,react,tailwind",
+      "image": "https://tse3.mm.bing.net/th/id/OIP.JCjpPBxeJUX88397dbZQsgHaEK?pid=Api&P=0&h=180",
+      "author": "selvan",
+      "createdAt": "2025-08-04T12:21:18.228Z"
+    },
+    {
+      "title": "tamizhselvan",
+      "subject": "asdasdasd  generateBlogFromIdea,\n\n",
+      "content": "\n              type=\"text\"\n              placeholder=\"e.g. Future of AI in education\"\n              value={blogIdea}\n              onChange={(e) => setBlogIdea(e.target.value)}\n              className=\"flex-grow border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500\"\n            />\n            <button\n              type=\"button\"\n              onClick={handleAutoFillFromIdea}\n              disabled={loadingAI}\n              className=\"bg-sky-600 text-white px-4 py-1.5 rounded hover:bg-sky-700 disabled:opacity-50\"\n            >\n              {loadingAI === \"Auto-Filling Form\" ? \"⏳ Filling...\" : \"🧠 AI Auto-Fill\"}\n            </button>\n          </div>\n        </div>\n\n        {/* Title */}\n        <div>\n          <label className=\"block font-medium mb-1\">Title</label>\n          <input\n            type=\"text\"\n            value={title}\n            onChange={(e) => setTitle(e.target.value)}\n            className=\"w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500\"\n            required\n          />\n        </div>\n\n        {/* Subject */}\n        <div>\n          <label className=\"block font-medium mb-1\">\n            Subject (Max 200 chars)\n          </label>\n          <textarea\n            rows={3}\n            value={subject}\n            onChange={(e) => setSubject(e.target.value)}\n            maxLength={200}\n            className=\"w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500\"\n            required\n          />\n          <p className=\"text-sm text-gray-500 text-right\">\n            {subject.length}/200\n          </p>\n        </div>\n\n        {/* Content */}\n        <div>\n          <label className=\"block font-medium mb-1\">Content</label>\n          <textarea\n            rows={6}\n            value={content}\n            onChange={(e) => setContent(e.target.value)}\n            className=\"w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500\"\n            required\n          />\n        </div>\n\n        {/* Tags */}\n        <div>\n          <label className=\"block font-medium mb-1\">\n            Tags (comma separated)\n          </label>\n          <input\n            type=\"text\"\n            value={tags}\n            onChange={(e) => setTags(e.target.value)}\n            className=\"w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500\"\n          />\n        </div>\n\n        {/* Image URL */}\n        <div>\n          <label className=\"block font-medium mb-1\">Image URL (optional)</label>\n          <input\n            type=\"url\"\n            value={imageUrl}\n            onChange={(e) => setImageUrl(e.target.value)}\n            placeholder=\"https://example.com/image.jpg\"\n            className=\"w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500\"\n          />\n        </div>\n\n        {/* Author and Date */}\n        <div className=\"flex justify-between text-gray-600 text-sm italic\">\n          <span>Author: {author}</span>\n          <span>Date: {new Date().toLocaleString()}</span>\n        </div>\n\n        {/* Submit Button */}\n        <button\n          type=\"submit\"\n          disabled={loadingAI}\n          className=\"w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition disabled:opacity-50\"\n        >\n          {loadingAI ? \"Please wait...\" : \"🚀 Submit Blog\"}\n        </button>\n\n        {/* Go Back */}\n        <button\n          onClick={handleGoBack}\n          type=\"button\"\n          className=\"fixed bottom-6 right-6 bg-gray-800 text-white px-5 py-3 rounded-full shadow-lg hover:bg-gray-700 hover:scale-105 transition\"\n        >\n          ← Go Back\n        </button>\n      </form>\n    </div>\n  );\n};\n\nexport default CreateBlog;\n",
+      "tag": "adasd,asdasd,dsfsdf,dfgd",
+      "image": "https://tse2.mm.bing.net/th/id/OIP.X3jDS9J58Q4ilo4vgjh-RAHaE5?pid=Api&P=0&h=180",
+      "author": "selva",
+      "createdAt": "2025-08-04T16:23:08.959Z",
+      "id": "8dab"
+    }
+  ],
+  "comments": []
+}
