@@ -1,7 +1,7 @@
 // blogApi.js
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/blogs";
+const BASE_URL = "https://smart-blog-finally.onrender.com";
 
 // Get all blogs
 export const getBlogs = () => {
