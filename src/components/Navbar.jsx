@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isPoster = localStorage.getItem("posterName");
   const isViewer = localStorage.getItem("viewerName");
@@ -18,69 +19,100 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
         {/* Logo / Title */}
         <div
           onClick={() => navigate("/")}
           className="text-2xl sm:text-3xl font-extrabold cursor-pointer text-white tracking-wide 
-                     hover:text-blue-200 transform hover:scale-105 transition mb-2 sm:mb-0"
+                     hover:text-blue-200 transform hover:scale-105 transition"
         >
           SmartBlog 🧠
         </div>
 
-        {/* Buttons */}
-        <div className="flex flex-row flex-wrap gap-2 sm:gap-3 items-center">
-          {/* Post button only on ViewerHome */}
+        {/* Hamburger for mobile */}
+        <div className="sm:hidden">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="text-white focus:outline-none"
+          >
+            {mobileOpen ? "✖" : "☰"}
+          </button>
+        </div>
+
+        {/* Desktop / large screens buttons */}
+        <div className="hidden sm:flex flex-row flex-wrap gap-3 items-center">
           {isViewer && onViewerHome && (
             <button
               onClick={() => navigate("/poster-login")}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
-               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
-               w-full sm:w-auto px-4 py-1.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl shadow-md 
-                         hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-1.5 rounded-xl shadow-md transition transform hover:-translate-y-0.5"
             >
-              ➕Post
+              ➕ Post
             </button>
           )}
-
-          {/* View button only on PosterHome */}
           {isPoster && onPosterHome && (
             <button
               onClick={() => navigate("/viewer-login")}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
-               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
-               w-full sm:w-auto px-4 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl shadow-md 
-                         hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-xl shadow-md transition transform hover:-translate-y-0.5"
             >
               🔍 View
             </button>
           )}
-
           {(isPoster || isViewer) && (
             <button
               onClick={() => navigate("/about-page")}
-              className=" bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
-               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
-               w-full sm:w-auto px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-md 
-                         hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-xl shadow-md transition transform hover:-translate-y-0.5"
             >
               About
             </button>
           )}
-
           {(isPoster || isViewer) && (
             <button
               onClick={handleLogout}
-              className="px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-xl shadow-md 
-                         hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
-               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
-               w-full sm:w-auto"
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-xl shadow-md transition transform hover:-translate-y-0.5"
             >
               Logout
             </button>
           )}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="sm:hidden flex flex-col gap-2 px-4 pb-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600">
+          {isViewer && onViewerHome && (
+            <button
+              onClick={() => navigate("/poster-login")}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl shadow-md transition"
+            >
+              ➕ Post
+            </button>
+          )}
+          {isPoster && onPosterHome && (
+            <button
+              onClick={() => navigate("/viewer-login")}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl shadow-md transition"
+            >
+              🔍 View
+            </button>
+          )}
+          {(isPoster || isViewer) && (
+            <button
+              onClick={() => navigate("/about-page")}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl shadow-md transition"
+            >
+              About
+            </button>
+          )}
+          {(isPoster || isViewer) && (
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl shadow-md transition"
+            >
+              Logout
+            </button>
+          )}
+        </div>
+      )}
     </nav>
   );
 };
