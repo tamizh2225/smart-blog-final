@@ -78,135 +78,162 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow-md">
-      <h2 className="text-2xl font-semibold mb-6">📝 Create New Blog</h2>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-blue-600 text-white p-6">
+      <div
+        className="max-w-3xl mx-auto p-6 mt-8 
+                   bg-gradient-to-br from-indigo-500 via-purple-600 to-blue-600 text-white p-6"
+      >
+        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text">
+          📝 Create New Blog
+        </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        {/* Blog Idea Input */}
-        <div>
-          <label className="block font-medium mb-1">💡 Blog Idea</label>
-          <div className="flex gap-3">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Blog Idea Input */}
+          <div>
+            <label className="block font-semibold mb-1">💡 Blog Idea</label>
+            <div className="flex gap-3">
+              <input
+                type="text"
+                placeholder="e.g. Future of AI in education"
+                value={blogIdea}
+                onChange={(e) => setBlogIdea(e.target.value)}
+                className="flex-grow px-3 py-2 rounded-xl bg-white/10 border border-white/20 
+                         placeholder-gray-300 text-black focus:outline-none 
+                         focus:ring-2 focus:ring-indigo-400"
+              />
+              <button
+                type="button"
+                onClick={handleAutoFillFromIdea}
+                disabled={loadingAI}
+                className="bg-gradient-to-r from-indigo-400 via-purple-500 to-blue-500 
+                         text-white px-4 py-2 rounded-xl shadow-md 
+                         hover:scale-105 transition disabled:opacity-50"
+              >
+                {loadingAI === "Auto-Filling Form"
+                  ? "⏳ Filling..."
+                  : "🧠 AI Auto-Fill"}
+              </button>
+            </div>
+          </div>
+
+          {/* Title */}
+          <div>
+            <label className="block font-semibold mb-1">Title</label>
             <input
               type="text"
-              placeholder="e.g. Future of AI in education"
-              value={blogIdea}
-              onChange={(e) => setBlogIdea(e.target.value)}
-              className="flex-grow border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 
+                       placeholder-gray-300 text-black focus:outline-none 
+                       focus:ring-2 focus:ring-indigo-400"
+              required
             />
-            <button
-              type="button"
-              onClick={handleAutoFillFromIdea}
-              disabled={loadingAI}
-              className="bg-sky-600 text-white px-4 py-1.5 rounded hover:bg-sky-700 disabled:opacity-50"
-            >
-              {loadingAI === "Auto-Filling Form"
-                ? "⏳ Filling..."
-                : "🧠 AI Auto-Fill"}
-            </button>
           </div>
-        </div>
 
-        {/* Title */}
-        <div>
-          <label className="block font-medium mb-1">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
-        {/* Subject */}
-        <div>
-          <label className="block font-medium mb-1">
-            Subject (Max 200 chars)
-          </label>
-          <textarea
-            rows={3}
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            maxLength={200}
-            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <p className="text-sm text-gray-500 text-right">
-            {subject.length}/200
-          </p>
-        </div>
-
-        {/* Content */}
-        <div>
-          <label className="block font-medium mb-1">Content</label>
-          <textarea
-            rows={6}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
-
-        {/* Tags */}
-        <div>
-          <label className="block font-medium mb-1">
-            Tags (comma separated)
-          </label>
-          <input
-            type="text"
-            value={tags}
-            onChange={(e) => setTags(e.target.value)}
-            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        {/* Image URL */}
-        <div>
-          <label className="block font-medium mb-1">Image URL (optional)</label>
-          <input
-            type="url"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="https://example.com/image.jpg"
-            className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt="Preview"
-              className="w-full h-48 object-cover rounded-md mt-2"
-              onError={(e) => {
-                e.target.src = "/placeholder.png";
-              }}
+          {/* Subject */}
+          <div>
+            <label className="block font-semibold mb-1">
+              Subject (Max 200 chars)
+            </label>
+            <textarea
+              rows={3}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              maxLength={200}
+              className="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 
+                       placeholder-gray-300 text-black focus:outline-none 
+                       focus:ring-2 focus:ring-indigo-400"
+              required
             />
-          )}
-        </div>
+            <p className="text-sm text-white/60 text-right">
+              {subject.length}/200
+            </p>
+          </div>
 
-        {/* Author and Date */}
-        <div className="flex justify-between text-gray-600 text-sm italic">
-          <span>Author: {author}</span>
-          <span>Date: {new Date().toLocaleString()}</span>
-        </div>
+          {/* Content */}
+          <div>
+            <label className="block font-semibold mb-1">Content</label>
+            <textarea
+              rows={6}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 
+                       placeholder-gray-300 text-black focus:outline-none 
+                       focus:ring-2 focus:ring-indigo-400"
+              required
+            />
+          </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loadingAI}
-          className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition disabled:opacity-50"
-        >
-          {loadingAI ? "Please wait..." : "🚀 Submit Blog"}
-        </button>
+          {/* Tags */}
+          <div>
+            <label className="block font-semibold mb-1">
+              Tags (comma separated)
+            </label>
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 
+                       placeholder-gray-300 text-black focus:outline-none 
+                       focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
 
-        {/* Go Back */}
-        <button
-          onClick={handleGoBack}
-          type="button"
-          className="fixed bottom-6 right-6 bg-gray-800 text-white px-5 py-3 rounded-full shadow-lg hover:bg-gray-700 hover:scale-105 transition"
-        >
-          ← Go Back
-        </button>
-      </form>
+          {/* Image URL */}
+          <div>
+            <label className="block font-semibold mb-1">
+              Image URL (optional)
+            </label>
+            <input
+              type="url"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              placeholder="https://example.com/image.jpg"
+              className="w-full px-3 py-2 rounded-xl bg-white/10 border border-white/20 
+                       placeholder-gray-300 text-black focus:outline-none 
+                       focus:ring-2 focus:ring-indigo-400"
+            />
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt="Preview"
+                className="w-full h-48 object-cover rounded-xl mt-2 border border-white/20"
+                onError={(e) => {
+                  e.target.src = "/placeholder.png";
+                }}
+              />
+            )}
+          </div>
+
+          {/* Author and Date */}
+          <div className="flex justify-between text-white/70 text-sm italic">
+            <span>Author: {author}</span>
+            <span>Date: {new Date().toLocaleString()}</span>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loadingAI}
+            className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 
+                     text-white py-3 rounded-xl shadow-md font-semibold 
+                     hover:scale-[1.02] transition disabled:opacity-50"
+          >
+            {loadingAI ? "Please wait..." : "🚀 Submit Blog"}
+          </button>
+
+          {/* Go Back */}
+          <button
+            onClick={handleGoBack}
+            type="button"
+            className="fixed bottom-6 right-6 bg-white/10 backdrop-blur-lg 
+                     text-white px-5 py-3 rounded-full border border-white/20 
+                     shadow-lg hover:scale-110 hover:bg-white/20 transition"
+          >
+            ← Go Back
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import SearchBar from "../components/SearchBar";
 import { getBlogs } from "../api/blogApi";
+import SearchBar from "../components/SearchBar";
+import Navbar from "../components/Navbar";
 import BlogCardViewer from "../components/BlogCardViewer";
 
 const ViewerHome = () => {
@@ -38,25 +38,40 @@ const ViewerHome = () => {
       if (sortBy === "za") return b.title.localeCompare(a.title);
       return 0;
     });
+
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-blue-600 text-white">
+      {/* Navbar */}
       <Navbar />
 
-      <h2 className="text-2xl font-semibold mb-4">Welcome, {viewerName} 👀</h2>
+      {/* Welcome */}
+      <h2 className="text-center text-3xl sm:text-4xl font-bold mb-6 mt-4">
+        Welcome, {viewerName} 👀
+      </h2>
 
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-      />
-      <div className="grid gap-6 mt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {/* Search */}
+      <div className="max-w-xl mx-auto mb-10">
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+        />
+      </div>
+
+      {/* Blog Cards */}
+      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
-            <BlogCardViewer key={blog.id} blog={blog} />
+            <div
+              key={blog.id}
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-5 shadow-lg border border-white/20 hover:scale-[1.02] transform transition"
+            >
+              <BlogCardViewer blog={blog} />
+            </div>
           ))
         ) : (
-          <p>No blogs found.</p>
+          <p className="text-center text-blue-100">No blogs found.</p>
         )}
       </div>
     </div>

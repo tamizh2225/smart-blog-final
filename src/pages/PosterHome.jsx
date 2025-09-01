@@ -71,40 +71,56 @@ const PosterHome = () => {
     });
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-blue-600 text-white">
       <Navbar />
 
       {/* ✅ Toast Message */}
       {showToast && (
-        <div className="fixed top-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow-md z-50">
+        <div className="fixed top-6 right-6 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50">
           ✅ Blog successfully created!
         </div>
       )}
 
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold">Hello, {posterName} 👋</h2>
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 mt-4 gap-4 sm:gap-0">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center sm:text-left">
+          Hello, {posterName} 👋
+        </h2>
         <button
           onClick={() => navigate("/create-blog")}
-          className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition"
+          className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-xl p-4 
+                    bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
+               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
+               w-full sm:w-auto"
         >
           ➕ Create New Blog
         </button>
       </div>
 
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-      />
+      {/* Search Bar */}
+      <div className="max-w-xl mx-auto mb-10">
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+        />
+      </div>
 
-      <div className="grid gap-6 mt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {/* Blog Cards */}
+      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
-            <BlogCard key={blog.id} blog={blog} isPosterView={true} />
+            <div
+              key={blog.id}
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-5 shadow-lg border border-white/20 
+                         hover:scale-[1.02] transform transition"
+            >
+              <BlogCard blog={blog} isPosterView={true} />
+            </div>
           ))
         ) : (
-          <p>No blogs found.</p>
+          <p className="text-center text-blue-100">No blogs found.</p>
         )}
       </div>
     </div>

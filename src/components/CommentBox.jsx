@@ -32,7 +32,7 @@ const CommentBox = ({ blogId }) => {
 
     const updatedComments = [newComment, ...comments];
     setComments(updatedComments);
-    saveCommentsToLocalStorage(updatedComments); // 🔁 Save here
+    saveCommentsToLocalStorage(updatedComments);
     setName("");
     setText("");
   };
@@ -40,55 +40,59 @@ const CommentBox = ({ blogId }) => {
   const handleDelete = (id) => {
     const updatedComments = comments.filter((c) => c.id !== id);
     setComments(updatedComments);
-    saveCommentsToLocalStorage(updatedComments); // 🔁 Save here too
+    saveCommentsToLocalStorage(updatedComments);
   };
 
   return (
     <div className="mt-6">
+      {/* Input Form */}
       <form onSubmit={handleSubmit} className="space-y-3">
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
-          className="w-full border px-4 py-2 rounded"
+          className="w-full px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-black placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Write your comment..."
-          className="w-full border px-4 py-2 rounded"
+          className="w-full px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-black placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="w-full sm:w-auto bg-gradient-to-r from-indigo-400 via-purple-500 to-blue-500 
+                     text-white px-6 py-2 rounded-xl shadow-md 
+                     hover:scale-105 transform transition font-semibold"
         >
           ➕ Add Comment
         </button>
       </form>
 
+      {/* Comments List */}
       <ul className="mt-6 space-y-4">
         {comments.length > 0 ? (
           comments.map((c) => (
             <li
               key={c.id}
-              className="bg-gray-100 p-4 rounded shadow-sm flex justify-between"
+              className="bg-white/10 backdrop-blur-lg p-4 rounded-xl shadow-md border border-white/20 flex justify-between items-start"
             >
               <div>
-                <p className="font-semibold">{c.name}</p>
-                <p className="text-gray-700">{c.text}</p>
-                <p className="text-sm text-gray-500">{c.createdAt}</p>
+                <p className="font-semibold text-indigo-200">{c.name}</p>
+                <p className="text-indigo-50">{c.text}</p>
+                <p className="text-sm text-white/60">{c.createdAt}</p>
               </div>
               <button
                 onClick={() => handleDelete(c.id)}
-                className="text-red-500 font-bold"
+                className="text-red-400 font-bold hover:text-red-500 transition"
               >
-                DELETE
+                Delete ❌
               </button>
             </li>
           ))
         ) : (
-          <p className="text-gray-400">No comments yet.</p>
+          <p className="text-indigo-100">No comments yet.</p>
         )}
       </ul>
     </div>

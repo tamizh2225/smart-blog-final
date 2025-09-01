@@ -6,8 +6,8 @@ const About = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+    from_name: "",
     from_email: "",
-    subject: "",
     message: "",
   });
 
@@ -19,18 +19,18 @@ const About = () => {
     e.preventDefault();
     emailjs
       .send(
-        "service_nr04rxk",
-        "template_20ebpzc",
+        "service_nr04rxk", // your service id
+        "template_20ebpzc", // your template id
         formData,
-        "ESO6-G60SuHLiG82X"
+        "ESO6-G60SuHLiG82X" // your public key
       )
       .then(
-        (result) => {
-          alert("Email sent successfully!");
-          setFormData({ from_email: "", from_name: "", message: "" });
+        () => {
+          alert("✅ Email sent successfully!");
+          setFormData({ from_name: "", from_email: "", message: "" });
         },
-        (error) => {
-          alert("Failed to send email. Please try again.");
+        () => {
+          alert("❌ Failed to send email. Please try again.");
         }
       );
   };
@@ -45,53 +45,59 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200 text-gray-800 p-6 md:p-16">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-blue-600 text-white p-6">
       {/* Go Back */}
       <button
         onClick={handleGoBack}
         type="button"
-        className="fixed bottom-6 right-6 bg-gray-800 text-white px-5 py-3 rounded-full shadow-lg hover:bg-gray-700 hover:scale-105 transition"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-5 py-3 rounded-full shadow-lg hover:scale-105 transition bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
+               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
+               w-full sm:w-auto"
       >
         ← Go Back
       </button>
-      <h1 className="text-4xl font-bold mb-6 text-center">About This Blog</h1>
+
+      {/* Header */}
+      <h1 className="text-4xl font-bold mb-6 text-center text-gray-900">
+        About This Blog
+      </h1>
 
       {/* Features */}
-      <section className="mb-12">
+      <section className="mb-12 bg-">
         <h2 className="text-2xl font-semibold mb-4">🔍 Key Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               title: "AI-powered tools",
-              aesc: "AI tools auto-generate titles, summaries, tags.",
+              desc: "AI tools auto-generate titles, summaries, tags.",
             },
             {
               title: "Dark Mode",
-              aesc: "Dark Mode enables a user-friendly night theme.",
+              desc: "Dark Mode enables a user-friendly night theme.",
             },
             {
               title: "Role-based Views",
-              aesc: "Role-based views separate poster and viewer access.",
+              desc: "Poster and viewer access kept separate.",
             },
             {
               title: "Responsive Design",
-              aesc: "Optimizes blog layout for all devices.",
+              desc: "Optimized for all screen sizes.",
             },
             {
               title: "Reusable Components",
-              aesc: "Modular UI parts used across blog pages.",
+              desc: "UI parts are modular and consistent.",
             },
             {
               title: "REST API Integration",
-              aesc: "Fetches and updates blog data from backend.",
+              desc: "Dynamic blog data fetching/updating.",
             },
-          ].map((feature, i) => (
+          ].map((f, i) => (
             <div
               key={i}
-              className="bg-white shadow-xl rounded-xl p-6 hover:scale-[1.03] transition-all border-t-4 border-blue-500"
+              className="bg-white shadow-lg rounded-xl p-6 border-l-4 border-indigo-500 hover:scale-[1.03] transition-all"
             >
-              <h3 className="text-xl font-semibold">{feature.title}</h3>
-              <p className="text-sm text-gray-600 mt-2">{feature.aesc}</p>
+              <h3 className="text-xl font-semibold text-gray-800">{f.title}</h3>
+              <p className="text-sm text-gray-600 mt-2">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -104,46 +110,46 @@ const About = () => {
           {[
             {
               title: "Viewer Home",
-              desc: "The Viewer Home page lets users browse and search published blog posts. It shows blog summaries with titles, images, and dates. Users can click to view full blog details. Editing and deleting options are hidden to keep it read-only. The page supports filtering, responsive design, and smooth navigation for an enjoyable reading experience.",
+              desc: "Browse blogs with search and filters. Clean, read-only design.",
             },
             {
               title: "Poster Home",
-              desc: "Poster Home is the dashboard for blog creators to manage their content. Posters can view all their blogs, search by title/content, sort by date, and use buttons to edit or delete posts. It displays toast notifications for actions like creation or updates, and includes a button to navigate to the Create Blog page.",
+              desc: "Dashboard for managing blogs with edit/delete options.",
             },
             {
               title: "Blog Detail",
-              desc: "The Blog Detail page displays the full content of a selected blog post. It shows the title, image, tags, published date, and complete content in a clean layout. Accessible by both posters and viewers, it offers a focused reading experience. All data is fetched by ID, and the design remains consistent with the rest of the blog UI.",
+              desc: "Displays full blog content with title, tags, and date.",
             },
             {
               title: "Create Blog",
-              desc: "The Create Blog page allows posters to add new blog entries with fields like title, summary, content, tags, and image URL. It includes a Draft/Published toggle and optional AI-powered buttons to generate title, summary, image, and tags. On submission, data is validated, timestamped, sent to the API, and a toast confirms success before redirecting. AI-powered blog editor with tag suggestions.",
+              desc: "Add new blog posts with AI-powered helpers.",
             },
             {
               title: "Edit Blog",
-              desc: "The Edit Blog page lets posters update existing blog posts. It fetches blog data by ID and pre-fills all fields including title, summary, content, tags, and image. Posters can modify details, toggle draft/published status, and save changes via API. It includes validation, toast feedback, a cancel button, and ensures smooth navigation back to Poster Home. Modify published content and update instantly.",
+              desc: "Update existing posts with pre-filled form and validation.",
             },
             {
               title: "About Page",
-              desc: "The About page introduces the purpose and vision of the Smart-Blog platform. It explains how the app empowers content creators and readers through clean design, AI tools, and easy blog management. It highlights the tech stack used and briefly showcases key features like role-based access, responsive design, and REST API integration. Know more about the platform and contact form.",
+              desc: "Platform purpose, features, and contact form.",
             },
-          ].map((page, i) => (
+          ].map((p, i) => (
             <div
               key={i}
               className="bg-white shadow-md p-6 rounded-lg hover:shadow-xl transition"
             >
-              <h3 className="text-xl font-semibold">{page.title}</h3>
-              <p className="text-sm text-gray-600 mt-2">{page.desc}</p>
+              <h3 className="text-xl font-semibold text-gray-800">{p.title}</h3>
+              <p className="text-sm text-gray-600 mt-2">{p.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Contact Form */}
+      {/* Contact */}
       <section className="mb-16">
         <h2 className="text-2xl font-semibold mb-4">📬 Contact Me</h2>
         <form
           onSubmit={handleSendEmail}
-          className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-xl p-8 max-w-xl mx-auto transform hover:shadow-xl transition-all"
+          className="bg-white/95 shadow-lg rounded-xl p-8 max-w-xl mx-auto border border-indigo-200"
         >
           <div className="mb-4">
             <label className="block text-sm font-medium">Name</label>
@@ -153,19 +159,20 @@ const About = () => {
               value={formData.from_name}
               onChange={handleChange}
               required
-              className="w-full border px-4 py-2 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Excited to know your name"
+              className="w-full text-black border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Your name"
             />
           </div>
+
           <div className="mb-4">
-            <label className="block text-sm font-medium">Your Email</label>
+            <label className="block text-sm font-medium">Email</label>
             <input
               type="email"
               name="from_email"
               value={formData.from_email}
               onChange={handleChange}
               required
-              className="w-full border px-4 py-2 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-black border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               placeholder="you@example.com"
             />
           </div>
@@ -178,15 +185,18 @@ const About = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full border px-4 py-2 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Write your message here..."
-            ></textarea>
+              className="w-full text-black border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Write your message..."
+            />
           </div>
+
           <button
             type="submit"
-            className="bg-blue-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-1 hover:scale-105 transition duration-300"
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-6 rounded-lg shadow-md hover:scale-105 transition bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg shadow-md 
+               hover:shadow-lg transform hover:-translate-y-0.5 transition font-medium 
+               w-full sm:w-auto"
           >
-            Send
+            Send 💌
           </button>
         </form>
       </section>
@@ -205,7 +215,7 @@ const About = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <i className="fab fa-github hover:text-black transition"></i>
+          <i className="fab fa-github hover:text-gray-900 transition"></i>
         </a>
         <a
           href="https://www.instagram.com/tamizh_.s/"

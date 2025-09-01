@@ -16,25 +16,36 @@ const ViewerLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
-      <h2 className="text-2xl font-semibold mb-6">Viewer Login</h2>
+    <div
+      className="relative min-h-screen flex items-center justify-center p-4 overflow-hidden
+                 bg-gradient-to-br from-indigo-500 via-purple-600 to-blue-600 text-white"
+    >
+      {/* Dark overlay for contrast */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/50"></div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-sm">
-        <input
-          type="text"
-          placeholder="Enter your name or email"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="border rounded p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-600"
-        />
+      {/* Form container */}
+      <div className="relative z-10 w-full max-w-sm bg-black/20 backdrop-blur-md p-6 rounded-2xl shadow-2xl flex flex-col items-center">
+        <h2 className="text-2xl font-semibold mb-6 text-white text-center">
+          Viewer Login
+        </h2>
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition"
-        >
-          Continue as Viewer
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="flex flex-col w-full">
+          <input
+            type="text"
+            placeholder="Enter your name or email"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="border border-white/40 rounded-lg p-3 mb-4 bg-white/20 text-black placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-800 backdrop-blur-sm"
+          />
+
+          <button
+            type="submit"
+            className="px-5 py-3 rounded border-2 border-purple-800 bg-transparent hover:bg-purple-800 hover:border-purple-950 transition"
+          >
+            Continue as Viewer
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
